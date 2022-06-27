@@ -174,7 +174,10 @@ commit() {
     if [ "$answer_commit" = "y" ]; then
         read -p "Enter commit message: " commit_message
         git commit -m "$commit_message"
+        clear
+        echo "Commited successfully: $commit_message"
     elif [ "$answer_commit" = "n" ]; then
+        clear
         echo "No changes committed"
     else
         echo "Invalid input, Please enter y or n"
