@@ -60,16 +60,23 @@ echo
 git remote
 git remote -v
 
-# add the remote repository
-read -p "Do you want to add a remote repository? (y/n) " answer_add_remote
-if [ "$answer_add_remote" = "y" ]; then
-    read -p "Enter remote repository name: " remote_name
-    read -p "Enter remote repository url: " remote_url
-    git remote add $remote_name $remote_url
-else
-    echo
-    echo "No remote repository added"
-fi
+echo
+
+read -p "Do you want to add or remove a remote repository? (y/n) " answer_remote
+if [ "$answer_remote" = "y" ]; then
+    read -p "what do you want to do add or remove a remote repository? (a/r) " answer_add_remove
+    if [ "$answer_add_remove" = "a" ]; then
+        read -p "Enter remote repository name: " remote_repository_name
+        read -p "Enter remote repository URL: " remote_repository_URL
+        git remote add $remote_repository_name $remote_repository_URL
+    else
+        if [ "$answer_add_remove" = "r" ]; then
+            read -p "Enter remote repository name: " remote_repository_name
+            git remote rm $remote_repository_name
+        else
+            echo "No remote repository added or removed"
+        fi
+    fi
 
 git remote
 git remote -v
