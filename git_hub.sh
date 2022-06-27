@@ -6,7 +6,6 @@ init_fun() {
     else
         if [ "$answer_init" = "y" ]; then
             echo "OK, continue"
-            echo
         else
             echo
             echo "Invalid input, Please enter y or n"
@@ -22,6 +21,7 @@ modify_branch() {
     echo
     git branch
     echo
+
     another_branch_fun() {
         echo
         read -p "DO you want to perform another branch modification? (y/n) " another_branch
@@ -64,19 +64,21 @@ modify_branch() {
             echo "Invalid input, Please enter s or r"
             modify_branch
         fi
+
+        echo
+        git branch
+        echo
     elif [ "$answer_switch" = "n" ]; then
         echo "No branch added or removed"
     else
         echo "Invalid input, Please enter y or n"
         modify_branch
     fi
-
-    git branch
 }
 modify_branch
-echo
 
 # check for unmodified files & uncommited changes
+echo
 git status
 echo
 
@@ -174,6 +176,11 @@ modify_remote() {
             modify_remote
         fi
 
+        echo
+        git remote
+        git remote -v
+        echo
+
     elif [ "$answer_remote" = "n" ]; then
         echo "No remote repository added or removed"
 
@@ -181,11 +188,6 @@ modify_remote() {
         echo "Invalid input, Please enter y or n"
         modify_remote
     fi
-
-    echo
-    git remote
-    git remote -v
-    echo
 }
 modify_remote
 
