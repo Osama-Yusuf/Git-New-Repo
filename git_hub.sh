@@ -103,16 +103,20 @@ modify_branch() {
         if [ "$answer_add_remove" = "s" ]; then
             echo
             read -p "Enter the branch name you want to switch to: " branch_name
+
             git checkout $branch_name
-        elif [ "$answer_add_remove" = "r" ]; then
-            read -p "Enter the branch name you want to delete: " branch_name
 
             echo
+            another_branch_fun
+        elif [ "$answer_add_remove" = "r" ]; then
+            read -p "Enter the branch name you want to delete: " branch_name
+            echo
+
             git branch -d $branch_name
+            another_branch_fun
         else
             echo "Invalid input, Please enter s or r"
             modify_branch
-            another_branch_fun
         fi
     elif [ "$answer_switch" = "n" ]; then
         echo "No branch added or removed"
@@ -120,7 +124,7 @@ modify_branch() {
         echo "Invalid input, Please enter y or n"
         modify_branch
     fi
-    echo
+
     git branch
 }
 modify_branch
