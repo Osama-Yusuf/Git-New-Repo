@@ -56,6 +56,8 @@ if [ "$answer_switch" = "y" ]; then
         git checkout $branch_name
     elif [ "$answer_add_remove" = "r" ]; then
         read -p "Enter the branch name you want to delete: " branch_name
+        
+        echo
         git branch -d $branch_name
     else
         echo "No branch added or removed"
