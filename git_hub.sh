@@ -58,7 +58,7 @@ modify_branch() {
         echo
         read -p "Please enter a branch name to create one: " branch_name
         git branch "$branch_name"
-        git checkout -b "$branch_name" >/dev/null
+        echo "Branch $branch_name created"
     fi
 
     echo "You are on branch: $(git branch | grep "*" | cut -d " " -f 2)"
