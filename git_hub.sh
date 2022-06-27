@@ -14,6 +14,9 @@ else
     if [ "$answer_add_specific" = "y" ]; then
         read -p "Enter files name: " file_name
         git add $file_name
+    else 
+        echo
+        echo "No files added to the repository"
     fi
 fi
 
