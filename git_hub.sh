@@ -104,8 +104,9 @@ echo
 # push new changes to github
 read -p "Push new changes to github? (y/n) " answer_push
 if [ "$answer_push" = "y" ]; then
-    git push -u $remote_url main
+    read -p "Enter the branch name you want to push: " branch_name
+    git push -u $remote_repository_name $branch_name
 else
-    echo
+    # echo
     echo "No changes pushed to github"
 fi
