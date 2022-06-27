@@ -224,6 +224,7 @@ pull() {
         pull
     fi
 }
+pull
 
 push() {
     # push new changes to github
