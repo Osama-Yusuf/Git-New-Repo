@@ -137,31 +137,6 @@ git remote -v
 echo
 
 modify_remote() {
-    read -p "Do you want to add or remove a remote repository? (y/n) " answer_remote
-    if [ "$answer_remote" = "y" ]; then
-        read -p "what do you want to do (a)dd or (r)emove a remote repository? (a/r) " answer_add_remove
-        if [ "$answer_add_remove" = "a" ]; then
-            echo
-            read -p "Enter remote repository name you want to add: " remote_repository_name
-            read -p "Enter remote repository URL you want to add: " remote_repository_URL
-            echo
-            git remote add $remote_repository_name $remote_repository_URL
-        elif [ "$answer_add_remove" = "r" ]; then
-            echo
-            read -p "Enter remote repository name you want to remove: " remote_repository_name
-            echo
-            git remote rm $remote_repository_name
-        else
-            echo "Invalid input, Please enter a or r"
-            modify_remote
-        fi
-    elif [ "$answer_remote" = "n" ]; then
-        echo "No remote repository added or removed"
-    else
-        echo "Invalid input, Please enter y or n"
-        modify_remote
-    fi
-
     echo
     another_remote_fun() {
         read -p "DO you want to perform another remote repository modification? (y/n) " another_remote
@@ -177,15 +152,44 @@ modify_remote() {
             another_remote_fun
         fi
     }
-    another_remote_fun
+
+    read -p "Do you want to add or remove a remote repository? (y/n) " answer_remote
+    if [ "$answer_remote" = "y" ]; then
+        read -p "what do you want to do (a)dd or (r)emove a remote repository? (a/r) " answer_add_remove
+        if [ "$answer_add_remove" = "a" ]; then
+            echo
+            read -p "Enter remote repository name you want to add: " remote_repository_name
+            read -p "Enter remote repository URL you want to add: " remote_repository_URL
+            echo
+            git remote add $remote_repository_name $remote_repository_URL
+            another_remote_fun
+        elif [ "$answer_add_remove" = "r" ]; then
+            echo
+            read -p "Enter remote repository name you want to remove: " remote_repository_name
+            echo
+            git remote rm $remote_repository_name
+            another_remote_fun
+        else
+            echo "Invalid input, Please enter a or r"
+            modify_remote
+        fi
+
+    elif [ "$answer_remote" = "n" ]; then
+        echo "No remote repository added or removed"
+
+    else
+        echo "Invalid input, Please enter y or n"
+        modify_remote
+    fi
+
+    echo
+    git remote
+    git remote -v
+    echo
 }
 modify_remote
-echo
 
-git remote
-git remote -v
 echo
-
 git status
 echo
 
