@@ -103,6 +103,8 @@ echo
 # push new changes to github
 read -p "Push new changes to github? (y/n) " answer_push
 if [ "$answer_push" = "y" ]; then
+    git config credential.helper store
+    # checking if the remote repository & branch variables are set
     if [ -z "$remote_repository_name" ]; then
         if [ -z "$branch_name" ]; then
             # echo "vars are empty"
