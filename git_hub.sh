@@ -77,6 +77,7 @@ if [ "$answer_remote" = "y" ]; then
             echo "No remote repository added or removed"
         fi
     fi
+fi
 
 git remote
 git remote -v
