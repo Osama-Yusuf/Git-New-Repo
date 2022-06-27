@@ -195,26 +195,44 @@ echo
 git status
 echo
 
+remote_branch_vars() {
+    # checking if the remote repository & branch variables are set
+    if [ -z "$remote_repository_name" ]; then
+        if [ -z "$branch_name" ]; then
+            # echo "vars are empty"
+            read -p "Enter the remote repository name you want to push to (ex. origin): " remote_repository_name
+            read -p "Enter the branch name you want to push to (ex. main): " branch_name
+        else
+            # echo "vars are NOT empty and has: $remote_repository_name $branch_name"
+            echo
+        fi
+    else
+        # echo "vars are NOT empty and has: $remote_repository_name $branch_name"
+        echo
+    fi
+}
+pull() {
+    # pull the changes from remote repository
+    read -p "Do you want to pull the changes from remote repository? (y/n) " answer_pull
+    if [ "$answer_pull" = "y" ]; then
+        remote_branch_vars
+        git pull $remote_repository_name $branch_name
+    elif [ "$answer_pull" = "n" ]; then
+        echo "No changes pulled"
+    else
+        echo "Invalid input, Please enter y or n"
+        pull
+    fi
+}
+
 push() {
     # push new changes to github
+    echo
     read -p "Push new changes to github? (y/n) " answer_push
     if [ "$answer_push" = "y" ]; then
         git config credential.helper store
-        # checking if the remote repository & branch variables are set
-        if [ -z "$remote_repository_name" ]; then
-            if [ -z "$branch_name" ]; then
-                # echo "vars are empty"
-                read -p "Enter the remote repository name you want to push to (ex. origin): " remote_repository_name
-                read -p "Enter the branch name you want to push to (ex. main): " branch_name
-                git push -u $remote_repository_name $branch_name
-            else
-                # echo "vars are NOT empty and has: $remote_repository_name $branch_name"
-                git push -u $remote_repository_name $branch_name
-            fi
-        else
-            # echo "vars are NOT empty and has: $remote_repository_name $branch_name"
-            git push -u $remote_repository_name $branch_name
-        fi
+        remote_branch_vars
+        git push $remote_repository_name $branch_name
     elif [ "$answer_push" = "n" ]; then
         echo "No changes pushed"
     else
