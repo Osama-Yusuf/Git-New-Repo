@@ -272,8 +272,11 @@ pull() {
     read -p "Do you want to pull the changes from remote repository? (y/n) " answer_pull
     if [ "$answer_pull" = "y" ]; then
         remote_branch_vars
-        git pull $remote_repository_name $branch_name
+        git pull -u $remote_repository_name $branch_name
+        clear
+        echo "Pulled successfully"
     elif [ "$answer_pull" = "n" ]; then
+        clear
         echo "No changes pulled"
     else
         echo "Invalid input, Please enter y or n"
