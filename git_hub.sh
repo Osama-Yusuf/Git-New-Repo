@@ -104,16 +104,19 @@ modify_branch() {
             echo
             read -p "Enter the branch name you want to switch to: " branch_name
 
+            git branch $branch_name
             git checkout $branch_name
 
             echo
             another_branch_fun
+
         elif [ "$answer_add_remove" = "r" ]; then
             read -p "Enter the branch name you want to delete: " branch_name
             echo
 
             git branch -d $branch_name
             another_branch_fun
+
         else
             echo "Invalid input, Please enter s or r"
             modify_branch
