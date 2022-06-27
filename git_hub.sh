@@ -259,6 +259,7 @@ remote_branch_vars() {
     if [ -z "$remote_repository_name" ]; then
         if [ -z "$branch_name" ]; then
             # echo "vars are empty"
+            echo
             read -p "Enter the remote repository name you want to push to (ex. origin): " remote_repository_name
             read -p "Enter the branch name you want to push to (ex. main): " branch_name
         else
@@ -289,7 +290,6 @@ pull() {
 pull
 
 push() {
-
     error_pushing() {
         read -p "Is there an error preventing you from pushing? (y/n) " push_error
         if [ "$push_error" = "y" ]; then
@@ -299,7 +299,9 @@ push() {
             echo "Pushed successfully"
         elif [ "$push_error" = "n" ]; then
             clear
+            echo "Pushed successfully"
         else
+            clear
             echo "Invalid input, Please enter y or n"
             push
         fi
@@ -319,6 +321,7 @@ push() {
     elif [ "$answer_push" = "n" ]; then
         echo "No changes pushed"
     else
+        clear
         echo "Invalid input, Please enter y or n"
         push
     fi
