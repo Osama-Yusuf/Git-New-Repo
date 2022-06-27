@@ -249,7 +249,6 @@ commit() {
     fi
 }
 commit
-echo
 
 echo
 git status
