@@ -57,7 +57,7 @@ modify_branch() {
             read -p "Enter the branch name you want to delete: " branch_name
             echo
 
-            git branch -d $branch_name
+            git branch -D $branch_name
             another_branch_fun
 
         else
@@ -229,11 +229,11 @@ pull
 push() {
 
     error_pushing() {
-        read -p "Is there an error preventing you from pushing? (y/n) " answer_error
-        if [ "$answer_error" = "y" ]; then
+        read -p "Is there an error preventing you from pushing? (y/n) " push_error
+        if [ "$push_error" = "y" ]; then
             echo
             git push --force $remote_repository_name $branch_name
-        elif [ "$answer_error" = "n" ]; then
+        elif [ "$push_error" = "n" ]; then
             echo "No error"
         else
             echo "Invalid input, Please enter y or n"
