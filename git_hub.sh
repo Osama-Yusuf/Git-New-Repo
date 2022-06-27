@@ -57,6 +57,9 @@ fi
 
 echo
 
+git remote
+git remote -v
+
 # add the remote repository
 read -p "Do you want to add a remote repository? (y/n) " answer_add_remote
 if [ "$answer_add_remote" = "y" ]; then
@@ -67,6 +70,9 @@ else
     echo
     echo "No remote repository added"
 fi
+
+git remote
+git remote -v
 
 echo
 
