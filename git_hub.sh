@@ -22,22 +22,9 @@ git status
 echo
 
 files_add() {
-    # add all files or add specific files or do nothing
-    read -p "Do you want to add (a)ll files or add (s)pecific files or do (n)othing? (a/s/n) " answer_add
-    echo
-    if [ "$answer_add" = "a" ]; then
-        git add .
-    elif [ "$answer_add" = "s" ]; then
-        read -p "Enter the file name you want to add: " file_name
-        git add $file_name
-    elif [ "$answer_add" = "n" ]; then
-        echo "No files added"
-    else
-        echo "Invalid input, Please enter a or s or n"
-        files_add
-    fi
-    echo
+
     missed_add_fun() {
+        echo
         read -p "Missed to add files or did you make you a typo? (y/n) " missed_add
         if [ "$missed_add" = "y" ]; then
             files_add
@@ -51,7 +38,21 @@ files_add() {
             missed_add_fun
         fi
     }
-    missed_add_fun
+    # add all files or add specific files or do nothing
+    read -p "Do you want to add (a)ll files or add (s)pecific files or do (n)othing? (a/s/n) " answer_add
+    echo
+    if [ "$answer_add" = "a" ]; then
+        git add .
+    elif [ "$answer_add" = "s" ]; then
+        read -p "Enter the file name you want to add: " file_name
+        git add $file_name
+        missed_add_fun
+    elif [ "$answer_add" = "n" ]; then
+        echo "No files added"
+    else
+        echo "Invalid input, Please enter a or s or n"
+        files_add
+    fi
 }
 files_add
 echo
@@ -102,6 +103,7 @@ modify_branch() {
         modify_branch
     fi
 
+    echo
     another_branch_fun() {
         read -p "DO you want to perform another branch modification? (y/n) " another_branch
         if [ "$another_branch" = "y" ]; then
@@ -151,6 +153,7 @@ modify_remote() {
         modify_remote
     fi
 
+    echo
     another_remote_fun() {
         read -p "DO you want to perform another remote repository modification? (y/n) " another_remote
         if [ "$another_remote" = "y" ]; then
