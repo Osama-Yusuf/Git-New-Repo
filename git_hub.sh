@@ -247,8 +247,11 @@ push() {
     if [ "$answer_push" = "y" ]; then
         git config credential.helper store
         remote_branch_vars
+        echo
         git push $remote_repository_name $branch_name
+        echo
         error_pushing
+        echo
     elif [ "$answer_push" = "n" ]; then
         echo "No changes pushed"
     else
