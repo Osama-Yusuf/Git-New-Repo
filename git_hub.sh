@@ -24,6 +24,7 @@ echo
 files_add() {
     # add all files or add specific files or do nothing
     read -p "Do you want to add (a)ll files or add (s)pecific files or do (n)othing? (a/s/n) " answer_add
+    echo
     if [ "$answer_add" = "a" ]; then
         git add .
     elif [ "$answer_add" = "s" ]; then
@@ -35,6 +36,22 @@ files_add() {
         echo "Invalid input, Please enter a or s or n"
         files_add
     fi
+    echo
+    missed_add_fun() {
+        read -p "Missed to add files or did you make you a typo? (y/n) " missed_add
+        if [ "$missed_add" = "y" ]; then
+            files_add
+        elif [ "$missed_add" = "n" ]; then
+            echo "OK, continue"
+            echo
+        else
+            echo
+            echo "Invalid input, Please enter y or n"
+            echo
+            missed_add_fun
+        fi
+    }
+    missed_add_fun
 }
 files_add
 echo
@@ -84,6 +101,22 @@ modify_branch() {
         echo "Invalid input, Please enter y or n"
         modify_branch
     fi
+
+    another_branch_fun() {
+        read -p "DO you want to perform another branch modification? (y/n) " another_branch
+        if [ "$another_branch" = "y" ]; then
+            modify_branch
+        elif [ "$another_branch" = "n" ]; then
+            echo "OK, continue"
+            echo
+        else
+            echo
+            echo "Invalid input, Please enter y or n"
+            echo
+            another_branch_fun
+        fi
+    }
+    another_branch_fun
 }
 modify_branch
 echo
@@ -117,6 +150,22 @@ modify_remote() {
         echo "Invalid input, Please enter y or n"
         modify_remote
     fi
+
+    another_remote_fun() {
+        read -p "DO you want to perform another remote repository modification? (y/n) " another_remote
+        if [ "$another_remote" = "y" ]; then
+            modify_remote
+        elif [ "$another_remote" = "n" ]; then
+            echo "OK, continue"
+            echo
+        else
+            echo
+            echo "Invalid input, Please enter y or n"
+            echo
+            another_remote_fun
+        fi
+    }
+    another_remote_fun
 }
 modify_remote
 echo
