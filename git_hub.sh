@@ -44,6 +44,8 @@ git branch
 
 echo
 
+# to create a new branch type "git branch <branch_name>"
+
 read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
 if [ "$answer_switch" = "y" ]; then
     echo
