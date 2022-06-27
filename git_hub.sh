@@ -38,15 +38,12 @@ init_fun() {
     if [ "$answer_init" = "n" ]; then
         clear
         git init
+    elif [ "$answer_init" = "y" ]; then
+        clear
     else
-        if [ "$answer_init" = "y" ]; then
-            clear
-        else
-            echo
-            echo "Invalid input, Please enter y or n"
-            echo
-            init_fun
-        fi
+        clear
+        echo "Please answer y or n"
+        init_fun
     fi
 }
 init_fun
@@ -71,12 +68,12 @@ modify_branch() {
         echo
         read -p "DO you want to perform another branch modification? (y/n) " another_branch
         if [ "$another_branch" = "y" ]; then
+            clear
             modify_branch
         elif [ "$another_branch" = "n" ]; then
-            echo "OK, continue"
-            echo
+            clear
         else
-            echo
+            clear
             echo "Invalid input, Please enter y or n"
             echo
             another_branch_fun
@@ -119,6 +116,7 @@ modify_branch() {
         clear
         echo "No branch added or removed"
     else
+        clear
         echo "Invalid input, Please enter y or n"
         modify_branch
     fi
@@ -138,7 +136,7 @@ files_add() {
         elif [ "$missed_add" = "n" ]; then
             clear
         else
-            echo
+            clear
             echo "Invalid input, Please enter y or n"
             echo
             missed_add_fun
@@ -162,6 +160,7 @@ files_add() {
         clear
         echo "No files added"
     else
+        clear
         echo "Invalid input, Please enter a or s or n"
         files_add
     fi
@@ -292,8 +291,10 @@ push() {
         if [ "$push_error" = "y" ]; then
             echo
             git push --force $remote_repository_name $branch_name
+            clear
+            echo "Pushed successfully"
         elif [ "$push_error" = "n" ]; then
-            echo "No error"
+            clear
         else
             echo "Invalid input, Please enter y or n"
             push
@@ -319,4 +320,3 @@ push() {
     fi
 }
 push
-echo
