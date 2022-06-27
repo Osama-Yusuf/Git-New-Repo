@@ -46,8 +46,10 @@ echo
 
 read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
 if [ "$answer_switch" = "y" ]; then
+    echo
     read -p "what do you want to do switch or remove a remote a branch? (s/r) " answer_add_remove
     if [ "$answer_add_remove" = "s" ]; then
+        echo
         read -p "Enter the branch name you want to switch to: " branch_name
         git checkout $branch_name
     elif [ "$answer_add_remove" = "r" ]; then
@@ -56,6 +58,8 @@ if [ "$answer_switch" = "y" ]; then
     else
         echo "No branch added or removed"
     fi
+else
+    echo
 fi
 
 echo
