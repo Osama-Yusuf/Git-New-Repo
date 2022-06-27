@@ -179,6 +179,7 @@ commit() {
         clear
         echo "No changes committed"
     else
+        clear
         echo "Invalid input, Please enter y or n"
         commit
     fi
