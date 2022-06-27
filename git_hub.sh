@@ -3,7 +3,7 @@ read -p "Did you execute git init command here before? (y/n) " answer_init
 if [ "$answer_init" = "n" ]; then
     git init
 else
-    echo 
+    echo
 fi
 
 # check for unmodified files & uncommited changes
@@ -21,9 +21,8 @@ elif [ "$answer_add" = "s" ]; then
 elif [ "$answer_add" = "n" ]; then
     echo "No files added"
 else
-    echo  
+    echo
 fi
-
 
 echo
 
@@ -56,14 +55,14 @@ if [ "$answer_switch" = "y" ]; then
         git checkout $branch_name
     elif [ "$answer_add_remove" = "r" ]; then
         read -p "Enter the branch name you want to delete: " branch_name
-        
+
         echo
         git branch -d $branch_name
     else
         echo "No branch added or removed"
     fi
-else 
-    echo "No branch added or removed" 
+else
+    echo "No branch added or removed"
 fi
 
 echo
@@ -104,8 +103,21 @@ echo
 # push new changes to github
 read -p "Push new changes to github? (y/n) " answer_push
 if [ "$answer_push" = "y" ]; then
-    read -p "Enter the branch name you want to push: " branch_name
-    git push -u $remote_repository_name $branch_name
+    if [ -z "$remote_repository_name" ]; then
+        if [ -z "$branch_name" ]; then
+            # echo "vars are empty"
+            read -p "Enter the remote repository name you want to push to (ex. origin): " remote_repository_name
+            read -p "Enter the branch name you want to push to (ex. main): " branch_name
+            git push -u $remote_repository_name $branch_name
+        else
+            # echo "vars are NOT empty and has: $remote_repository_name $branch_name"
+            git push -u $remote_repository_name $branch_name
+        fi
+    else
+        # echo "vars are NOT empty and has: $remote_repository_name $branch_name"
+        git push -u $remote_repository_name $branch_name
+    fi
+
 else
     # echo
     echo "No changes pushed to github"
