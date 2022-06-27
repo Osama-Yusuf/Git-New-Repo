@@ -38,7 +38,6 @@ init_fun() {
     if [ "$answer_init" = "n" ]; then
         clear
         git init
-        echo
     else
         if [ "$answer_init" = "y" ]; then
             clear
