@@ -1,6 +1,6 @@
 # dicover project files in a git repository
-read -p "Do you want to discover project files in a git repository? (y/n) " answer_init
-if [ "$answer_init" = "y" ]; then
+read -p "Did you execute git init command here before? (y/n) " answer_init
+if [ "$answer_init" = "n" ]; then
     git init
 else
     echo 
@@ -16,7 +16,7 @@ read -p "Do you want to add all files or add specific files or do nothing? (a/s/
 if [ "$answer_add" = "a" ]; then
     git add .
 elif [ "$answer_add" = "s" ]; then
-    read -p "Enter the file name: " file_name
+    read -p "Enter the file name you want to add: " file_name
     git add $file_name
 elif [ "$answer_add" = "n" ]; then
     echo "No files added"
@@ -48,13 +48,13 @@ read -p "Do you want to switch to a different branch or remove a branch? (y/n) "
 if [ "$answer_switch" = "y" ]; then
     read -p "what do you want to do switch or remove a remote a branch? (s/r) " answer_add_remove
     if [ "$answer_add_remove" = "s" ]; then
-        read -p "Enter the branch name: " branch_name
+        read -p "Enter the branch name you want to switch to: " branch_name
         git checkout $branch_name
     elif [ "$answer_add_remove" = "r" ]; then
-        read -p "Enter the branch name: " branch_name
+        read -p "Enter the branch name you want to delete: " branch_name
         git branch -d $branch_name
     else
-        echo
+        echo "No branch added or removed"
     fi
 fi
 
@@ -69,12 +69,12 @@ read -p "Do you want to add or remove a remote repository? (y/n) " answer_remote
 if [ "$answer_remote" = "y" ]; then
     read -p "what do you want to do add or remove a remote repository? (a/r) " answer_add_remove
     if [ "$answer_add_remove" = "a" ]; then
-        read -p "Enter remote repository name: " remote_repository_name
-        read -p "Enter remote repository URL: " remote_repository_URL
+        read -p "Enter remote repository name you want to add: " remote_repository_name
+        read -p "Enter remote repository URL you want to add: " remote_repository_URL
         git remote add $remote_repository_name $remote_repository_URL
     else
         if [ "$answer_add_remove" = "r" ]; then
-            read -p "Enter remote repository name: " remote_repository_name
+            read -p "Enter remote repository name you want to remove: " remote_repository_name
             git remote rm $remote_repository_name
         else
             echo "No remote repository added or removed"
