@@ -198,8 +198,7 @@ modify_remote() {
         if [ "$another_remote" = "y" ]; then
             modify_remote
         elif [ "$another_remote" = "n" ]; then
-            echo "OK, continue"
-            echo
+            clear
         else
             echo
             echo "Invalid input, Please enter y or n"
@@ -217,12 +216,16 @@ modify_remote() {
             read -p "Enter remote repository URL you want to add: " remote_repository_URL
             echo
             git remote add $remote_repository_name $remote_repository_URL
+            clear
+            echo "$remote_repository_name added"
             another_remote_fun
         elif [ "$answer_add_remove" = "r" ]; then
             echo
             read -p "Enter remote repository name you want to remove: " remote_repository_name
             echo
             git remote rm $remote_repository_name
+            clear
+            echo "$remote_repository_name removed"
             another_remote_fun
         else
             echo "Invalid input, Please enter a or r"
@@ -235,8 +238,8 @@ modify_remote() {
         echo
 
     elif [ "$answer_remote" = "n" ]; then
+        clear
         echo "No remote repository added or removed"
-
     else
         echo "Invalid input, Please enter y or n"
         modify_remote
