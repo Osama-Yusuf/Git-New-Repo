@@ -39,6 +39,8 @@ else
     echo "No changes committed"
 fi
 
+echo
+
 # check which branch you are on
 git branch
 
@@ -47,9 +49,9 @@ echo
 read -p "Do you want to switch to a different branch? (y/n) " answer_switch
 if [ "$answer_switch" = "y" ]; then
     read -p "Enter branch name: " branch_name
-    git checkout $branch_name
+    git checkout -b $branch_name
 else
-    echo
+    echo "No branch switched"
 fi
 
 echo
