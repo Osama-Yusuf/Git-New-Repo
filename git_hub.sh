@@ -58,7 +58,7 @@ fi
 echo
 
 # add the remote repository
-read -p "Add the remote repository? (y/n) " answer_add_remote
+read -p "Do you want to add a remote repository? (y/n) " answer_add_remote
 if [ "$answer_add_remote" = "y" ]; then
     read -p "Enter remote repository name: " remote_name
     read -p "Enter remote repository url: " remote_url
