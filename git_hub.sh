@@ -62,8 +62,8 @@ if [ "$answer_switch" = "y" ]; then
     else
         echo "No branch added or removed"
     fi
-else
-    echo
+else 
+    echo "No branch added or removed" 
 fi
 
 echo
