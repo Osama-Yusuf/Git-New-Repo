@@ -227,6 +227,20 @@ pull() {
 pull
 
 push() {
+
+    error_pushing() {
+        read -p "Is there an error preventing you from pushing? (y/n) " answer_error
+        if [ "$answer_error" = "y" ]; then
+            echo
+            git push --force $remote_repository_name $branch_name
+        elif [ "$answer_error" = "n" ]; then
+            echo "No error"
+        else
+            echo "Invalid input, Please enter y or n"
+            push
+        fi
+    }
+
     # push new changes to github
     echo
     read -p "Push new changes to github? (y/n) " answer_push
@@ -234,6 +248,7 @@ push() {
         git config credential.helper store
         remote_branch_vars
         git push $remote_repository_name $branch_name
+        error_pushing
     elif [ "$answer_push" = "n" ]; then
         echo "No changes pushed"
     else
