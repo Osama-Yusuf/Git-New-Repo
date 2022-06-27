@@ -11,21 +11,19 @@ git status
 
 echo
 
-# add all files to the repository
-read -p "Add all files to the repository? (y/n) " answer_add_all
-if [ "$answer_add_all" = "y" ]; then
+# add all files or add specific files or do nothing
+read -p "Do you want to add all files or add specific files or do nothing? (a/s/n) " answer_add
+if [ "$answer_add" = "a" ]; then
     git add .
+elif [ "$answer_add" = "s" ]; then
+    read -p "Enter the file name: " file_name
+    git add $file_name
+elif [ "$answer_add" = "n" ]; then
+    echo "No files added"
 else
-    echo
-    read -p "Add specific files to the repository? (y/n) " answer_add_specific
-    if [ "$answer_add_specific" = "y" ]; then
-        read -p "Enter files name: " file_name
-        git add $file_name
-    else 
-        echo
-        echo "No files added to the repository"
-    fi
+    echo  
 fi
+
 
 echo
 
