@@ -1,11 +1,47 @@
+if (ls /bin | grep "git" >/dev/null); then
+    # echo "Good, Git is installed lets's move on the next step"
+    echo >/dev/null
+else
+    read -p "Git is not installed, would you like to install it? [y/n] " install_git
+    if [ "$install_git" = "y" ]; then
+        sudo apt-get install git
+    else
+        echo "Please install git and run this script again"
+        exit 1
+    fi
+fi
+
+if (git config -l | grep user.name >/dev/null); then
+    echo "Good, Git is installed & configured lets's move on the next step"
+    echo
+else
+    read -p "Git is not configured, would you like to configure it? [y/n] " configure_git
+    if [ "$configure_git" = "y" ]; then
+        echo
+        read -p "Please enter your UserName: " UserName
+        read -p "Please enter your Email: " Email
+        git config --global user.name "$UserName"
+        git config --global user.email "$Email"
+        echo
+        echo "Good, Git is installed & configured lets's move on the next step"
+        echo
+    else
+        echo "Please configure git and run this script again"
+        exit 1
+    fi
+fi
+
 init_fun() {
     # dicover project files in a git repository
+    # echo
     read -p "Did you execute git init command here before? (y/n) " answer_init
     if [ "$answer_init" = "n" ]; then
+        clear
         git init
+        echo
     else
         if [ "$answer_init" = "y" ]; then
-            echo "OK, continue"
+            clear
         else
             echo
             echo "Invalid input, Please enter y or n"
@@ -18,8 +54,18 @@ init_fun
 
 modify_branch() {
     # check which branch you are on
-    echo
-    git branch
+    if (git branch | grep "*" >/dev/null); then
+        echo >/dev/null
+    else
+        echo
+        echo "You are not on any branch"
+        echo
+        read -p "Please enter a branch name to create one: " branch_name
+        git branch "$branch_name"
+        git checkout -b "$branch_name" >/dev/null
+    fi
+
+    echo "You are on branch: $(git branch | grep "*" | cut -d " " -f 2)"
     echo
 
     another_branch_fun() {
@@ -41,6 +87,8 @@ modify_branch() {
     # to create a new branch type "git branch <branch_name>"
     read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
     if [ "$answer_switch" = "y" ]; then
+        clear
+        git branch
         echo
         read -p "what do you want to do (s)witch or (r)emove a remote a branch? (s/r) " answer_add_remove
         if [ "$answer_add_remove" = "s" ]; then
@@ -48,7 +96,7 @@ modify_branch() {
             read -p "Enter the branch name you want to switch to: " branch_name
 
             git branch $branch_name
-            git checkout $branch_name
+            git checkout $branch_name >/dev/null
 
             echo
             another_branch_fun
@@ -65,10 +113,11 @@ modify_branch() {
             modify_branch
         fi
 
-        echo
+        clear
         git branch
         echo
     elif [ "$answer_switch" = "n" ]; then
+        clear
         echo "No branch added or removed"
     else
         echo "Invalid input, Please enter y or n"
@@ -78,20 +127,17 @@ modify_branch() {
 modify_branch
 
 # check for unmodified files & uncommited changes
-echo
-git status
-echo
-
 files_add() {
+    echo
+    git status
+    echo
 
     missed_add_fun() {
-        echo
         read -p "Missed to add files or did you make you a typo? (y/n) " missed_add
         if [ "$missed_add" = "y" ]; then
             files_add
         elif [ "$missed_add" = "n" ]; then
-            echo "OK, continue"
-            echo
+            clear
         else
             echo
             echo "Invalid input, Please enter y or n"
@@ -101,14 +147,20 @@ files_add() {
     }
     # add all files or add specific files or do nothing
     read -p "Do you want to add (a)ll files or add (s)pecific files or do (n)othing? (a/s/n) " answer_add
-    echo
     if [ "$answer_add" = "a" ]; then
         git add .
+        clear
+        echo "All files added"
     elif [ "$answer_add" = "s" ]; then
+        clear
         read -p "Enter the file name you want to add: " file_name
         git add $file_name
+        echo
+        echo "$file_name added"
+        echo
         missed_add_fun
     elif [ "$answer_add" = "n" ]; then
+        clear
         echo "No files added"
     else
         echo "Invalid input, Please enter a or s or n"
@@ -116,7 +168,6 @@ files_add() {
     fi
 }
 files_add
-echo
 
 commit() {
     # commit the changes
