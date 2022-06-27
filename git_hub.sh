@@ -78,6 +78,23 @@ git branch
 echo
 
 modify_branch() {
+
+    another_branch_fun() {
+        echo
+        read -p "DO you want to perform another branch modification? (y/n) " another_branch
+        if [ "$another_branch" = "y" ]; then
+            modify_branch
+        elif [ "$another_branch" = "n" ]; then
+            echo "OK, continue"
+            echo
+        else
+            echo
+            echo "Invalid input, Please enter y or n"
+            echo
+            another_branch_fun
+        fi
+    }
+
     # to create a new branch type "git branch <branch_name>"
     read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
     if [ "$answer_switch" = "y" ]; then
@@ -95,6 +112,7 @@ modify_branch() {
         else
             echo "Invalid input, Please enter s or r"
             modify_branch
+            another_branch_fun
         fi
     elif [ "$answer_switch" = "n" ]; then
         echo "No branch added or removed"
@@ -103,22 +121,7 @@ modify_branch() {
         modify_branch
     fi
 
-    echo
-    another_branch_fun() {
-        read -p "DO you want to perform another branch modification? (y/n) " another_branch
-        if [ "$another_branch" = "y" ]; then
-            modify_branch
-        elif [ "$another_branch" = "n" ]; then
-            echo "OK, continue"
-            echo
-        else
-            echo
-            echo "Invalid input, Please enter y or n"
-            echo
-            another_branch_fun
-        fi
-    }
-    another_branch_fun
+    git branch
 }
 modify_branch
 echo
