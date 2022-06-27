@@ -120,7 +120,7 @@ modify_branch() {
         echo "Invalid input, Please enter y or n"
         modify_branch
     fi
-
+    echo
     git branch
 }
 modify_branch
