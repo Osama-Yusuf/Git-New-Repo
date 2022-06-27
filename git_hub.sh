@@ -50,6 +50,7 @@ read -p "Do you want to switch to a different branch? (y/n) " answer_switch
 if [ "$answer_switch" = "y" ]; then
     read -p "Enter branch name: " branch_name
     git checkout -b $branch_name
+    git branch
 else
     echo "No branch switched"
 fi
