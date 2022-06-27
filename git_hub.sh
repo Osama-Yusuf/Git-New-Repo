@@ -44,13 +44,18 @@ git branch
 
 echo
 
-read -p "Do you want to switch to a different branch? (y/n) " answer_switch
+read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
 if [ "$answer_switch" = "y" ]; then
-    read -p "Enter branch name: " branch_name
-    git checkout -b $branch_name
-    git branch
-else
-    echo "No branch switched"
+    read -p "what do you want to do switch or remove a remote a branch? (s/r) " answer_add_remove
+    if [ "$answer_add_remove" = "s" ]; then
+        read -p "Enter the branch name: " branch_name
+        git checkout $branch_name
+    elif [ "$answer_add_remove" = "r" ]; then
+        read -p "Enter the branch name: " branch_name
+        git branch -d $branch_name
+    else
+        echo
+    fi
 fi
 
 echo
