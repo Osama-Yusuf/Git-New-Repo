@@ -17,6 +17,65 @@ init_fun() {
 }
 init_fun
 
+modify_branch() {
+    # check which branch you are on
+    echo
+    git branch
+    echo
+    another_branch_fun() {
+        echo
+        read -p "DO you want to perform another branch modification? (y/n) " another_branch
+        if [ "$another_branch" = "y" ]; then
+            modify_branch
+        elif [ "$another_branch" = "n" ]; then
+            echo "OK, continue"
+            echo
+        else
+            echo
+            echo "Invalid input, Please enter y or n"
+            echo
+            another_branch_fun
+        fi
+    }
+
+    # to create a new branch type "git branch <branch_name>"
+    read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
+    if [ "$answer_switch" = "y" ]; then
+        echo
+        read -p "what do you want to do (s)witch or (r)emove a remote a branch? (s/r) " answer_add_remove
+        if [ "$answer_add_remove" = "s" ]; then
+            echo
+            read -p "Enter the branch name you want to switch to: " branch_name
+
+            git branch $branch_name
+            git checkout $branch_name
+
+            echo
+            another_branch_fun
+
+        elif [ "$answer_add_remove" = "r" ]; then
+            read -p "Enter the branch name you want to delete: " branch_name
+            echo
+
+            git branch -d $branch_name
+            another_branch_fun
+
+        else
+            echo "Invalid input, Please enter s or r"
+            modify_branch
+        fi
+    elif [ "$answer_switch" = "n" ]; then
+        echo "No branch added or removed"
+    else
+        echo "Invalid input, Please enter y or n"
+        modify_branch
+    fi
+
+    git branch
+}
+modify_branch
+echo
+
 # check for unmodified files & uncommited changes
 git status
 echo
@@ -71,66 +130,6 @@ commit() {
     fi
 }
 commit
-echo
-
-# check which branch you are on
-git branch
-echo
-
-modify_branch() {
-
-    another_branch_fun() {
-        echo
-        read -p "DO you want to perform another branch modification? (y/n) " another_branch
-        if [ "$another_branch" = "y" ]; then
-            modify_branch
-        elif [ "$another_branch" = "n" ]; then
-            echo "OK, continue"
-            echo
-        else
-            echo
-            echo "Invalid input, Please enter y or n"
-            echo
-            another_branch_fun
-        fi
-    }
-
-    # to create a new branch type "git branch <branch_name>"
-    read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
-    if [ "$answer_switch" = "y" ]; then
-        echo
-        read -p "what do you want to do (s)witch or (r)emove a remote a branch? (s/r) " answer_add_remove
-        if [ "$answer_add_remove" = "s" ]; then
-            echo
-            read -p "Enter the branch name you want to switch to: " branch_name
-
-            git branch $branch_name
-            git checkout $branch_name
-
-            echo
-            another_branch_fun
-
-        elif [ "$answer_add_remove" = "r" ]; then
-            read -p "Enter the branch name you want to delete: " branch_name
-            echo
-
-            git branch -d $branch_name
-            another_branch_fun
-
-        else
-            echo "Invalid input, Please enter s or r"
-            modify_branch
-        fi
-    elif [ "$answer_switch" = "n" ]; then
-        echo "No branch added or removed"
-    else
-        echo "Invalid input, Please enter y or n"
-        modify_branch
-    fi
-
-    git branch
-}
-modify_branch
 echo
 
 git remote
