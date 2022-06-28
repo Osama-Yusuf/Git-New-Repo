@@ -199,6 +199,7 @@ else
     git remote add $remote_repository_name $remote_repository_URL
     clear
     echo "$remote_repository_name added"
+    echo
     modify_remote
 fi
 
@@ -226,6 +227,7 @@ files_add() {
         git add .
         clear
         echo "All files added"
+        echo
     elif [ "$answer_add" = "s" ]; then
         clear
         read -p "Enter the file name you want to add: " file_name
