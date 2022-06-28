@@ -38,6 +38,7 @@ init_fun() {
     if [ "$answer_init" = "n" ]; then
         clear
         git init
+        echo
     elif [ "$answer_init" = "y" ]; then
         clear
     else
@@ -53,16 +54,13 @@ modify_branch() {
     if (git branch | grep "*" >/dev/null); then
         echo >/dev/null
     else
-        echo
         echo "You are not on any branch"
         echo
         read -p "Please enter a branch name to create one: " branch_name
-        git branch "$branch_name"
-        echo "Branch $branch_name created"
+        echo
+        git checkout -b "$branch_name"
+        echo
     fi
-
-    echo "You are on branch: $(git branch | grep "*" | cut -d " " -f 2)"
-    echo
 
     another_branch_fun() {
         echo
@@ -80,11 +78,16 @@ modify_branch() {
         fi
     }
 
+    git branch
+    echo
+
     # to create a new branch type "git branch <branch_name>"
     read -p "Do you want to switch to a different branch or remove a branch? (y/n) " answer_switch
     if [ "$answer_switch" = "y" ]; then
         clear
         git branch
+        # echo "You are on branch: $(git branch | grep "*" | cut -d " " -f 2)"
+
         echo
         read -p "what do you want to do (s)witch or (r)emove a remote a branch? (s/r) " answer_add_remove
         if [ "$answer_add_remove" = "s" ]; then
@@ -124,10 +127,6 @@ modify_branch() {
 modify_branch
 
 modify_remote() {
-    echo
-    git remote
-    git remote -v
-    echo
 
     another_remote_fun() {
         read -p "DO you want to perform another remote repository modification? (y/n) " another_remote
@@ -143,18 +142,29 @@ modify_remote() {
         fi
     }
 
+    echo
+    git remote
+    git remote -v
+    echo
+
     read -p "Do you want to add or remove a remote repository? (y/n) " answer_remote
     if [ "$answer_remote" = "y" ]; then
+        clear
+        git remote
+        git remote -v
+        echo
         read -p "what do you want to do (a)dd or (r)emove a remote repository? (a/r) " answer_add_remove
         if [ "$answer_add_remove" = "a" ]; then
             echo
-            read -p "Enter remote repository name you want to add: " remote_repository_name
+
+            read -p "Enter remote repository name you want to add (ex. origin): " remote_repository_name
             read -p "Enter remote repository URL you want to add: " remote_repository_URL
             echo
             git remote add $remote_repository_name $remote_repository_URL
             clear
             echo "$remote_repository_name added"
             another_remote_fun
+
         elif [ "$answer_add_remove" = "r" ]; then
             echo
             read -p "Enter remote repository name you want to remove: " remote_repository_name
@@ -177,16 +187,27 @@ modify_remote() {
     elif [ "$answer_remote" = "n" ]; then
         clear
         echo "No remote repository added or removed"
+        echo
     else
         echo "Invalid input, Please enter y or n"
         modify_remote
     fi
 }
-modify_remote
+
+if (git remote | grep "" >/dev/null); then
+    modify_remote
+else
+    read -p "Enter remote repository name you want to add (ex. origin): " remote_repository_name
+    read -p "Enter remote repository URL you want to add: " remote_repository_URL
+    echo
+    git remote add $remote_repository_name $remote_repository_URL
+    clear
+    echo "$remote_repository_name added"
+    modify_remote
+fi
 
 # check for unmodified files & uncommited changes
 files_add() {
-    echo
     git status
     echo
 
