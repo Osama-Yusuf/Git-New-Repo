@@ -43,7 +43,8 @@ bash git_hub.sh
 ```
 ## Tested Environments
 
-* Ubuntu Distro.
+* Ubuntu Os.
+* Kali-Linux Os.
 
 If you have successfully tested this script on others systems or platforms please let me know!
 
@@ -53,3 +54,12 @@ If you have successfully tested this script on others systems or platforms pleas
  * PayPal: https://paypal.me/OsamaYusuf
  * Buy me a coffee: https://www.buymeacoffee.com/OsamaYusuf
  * ETH: 0x507bF8931b534a81Ced18FDf8fc5BE4Daf08332B(https://stackedit.io/).
+
+---
+
+* `By Osama-Yusuf`
+* `Tranks for reading`
+
+-------
+##### Report bugs for "Git-Repo-Pusher"
+* `osama9mohamed5@gmail.com`
