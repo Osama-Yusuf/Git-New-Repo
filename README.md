@@ -1,1 +1,55 @@
-Git-New-Repo
+# Git Repo Pusher
+
+**Git Repo Pusher** is a **BASH** script that can be used to pull or push the latest updates to or from GitHub repo
+
+You can take a look at the [GitHub project page](https://github.com/Osama-Yusuf/Git-Repo-Pusher).
+
+
+## Features
+
+* Create a local repo
+* Commit changes
+* Pull the latest updates
+* Push latest updates
+
+
+## Getting started
+
+First, clone the repository using git (recommended):
+
+```bash
+git clone https://github.com/Osama-Yusuf/Git-Repo-Pusher.git
+```
+
+or download the script manually using this command:
+
+```bash
+curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh
+```
+
+Then give the execution permission to the script:
+
+```bash
+ $chmod +x git_hub.sh
+```
+## Usage
+
+Just execute the script:
+
+```
+./git_hub.sh
+or
+bash git_hub.sh
+```
+## Tested Environments
+
+* Ubuntu Distro.
+
+If you have successfully tested this script on others systems or platforms please let me know!
+
+## Donations
+
+ If you want to support this project, please consider donating:
+ * PayPal: https://paypal.me/OsamaYusuf
+ * Buy me a coffee: https://www.buymeacoffee.com/OsamaYusuf
+ * ETH: 0x507bF8931b534a81Ced18FDf8fc5BE4Daf08332B(https://stackedit.io/).
