@@ -21,17 +21,17 @@ First, clone the repository using git (recommended):
 git clone https://github.com/Osama-Yusuf/Git-Repo-Pusher.git
 ```
 
-or download the script manually using this command:
+or download the script manually and give it execution permission using this command:
 
 ```bash
-curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh
+curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh && chmod +x git_hub.sh
 ```
 
-Then give the execution permission to the script:
+<!-- Then give the execution permission to the script: -->
 
-```bash
+<!-- ```bash
 chmod +x git_hub.sh
-```
+``` -->
 ## Usage
 
 Just execute the script:
