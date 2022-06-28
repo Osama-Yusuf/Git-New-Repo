@@ -59,7 +59,6 @@ modify_branch() {
         read -p "Please enter a branch name to create one: " branch_name
         echo
         git checkout -b "$branch_name"
-        echo
     fi
 
     another_branch_fun() {
