@@ -30,7 +30,7 @@ curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub
 Then give the execution permission to the script:
 
 ```bash
- $chmod +x git_hub.sh
+chmod +x git_hub.sh
 ```
 ## Usage
 
