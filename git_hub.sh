@@ -117,7 +117,7 @@ modify_branch() {
         echo
     elif [ "$answer_switch" = "n" ]; then
         clear
-        echo "No branch added or removed"
+        # echo "No branch added or removed"
     else
         clear
         echo "Invalid input, Please enter y or n"
@@ -142,7 +142,6 @@ modify_remote() {
         fi
     }
 
-    echo
     git remote
     git remote -v
     echo
@@ -186,8 +185,6 @@ modify_remote() {
 
     elif [ "$answer_remote" = "n" ]; then
         clear
-        echo "No remote repository added or removed"
-        echo
     else
         echo "Invalid input, Please enter y or n"
         modify_remote
@@ -316,7 +313,8 @@ push() {
         if [ "$push_error" = "y" ]; then
             echo
             git push --force $remote_repository_name $branch_name
-            clear
+            # clear
+            echo
             echo "Pushed successfully"
         elif [ "$push_error" = "n" ]; then
             clear
