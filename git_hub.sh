@@ -347,3 +347,11 @@ push() {
     fi
 }
 push
+
+echo Made By Osama-Yusuf
+echo My Linkedin: https://www.linkedin.com/in/osama--youssef/
+echo GitHub Repo: https://github.com/Osama-Yusuf/WIFI-Password-Cracker
+
+# Made by Osama-Yusuf
+# GitHub Repo: https://github.com/Osama-Yusuf/WIFI-Password-Cracker
+# My Linkedin: https://www.linkedin.com/in/osama--youssef/
