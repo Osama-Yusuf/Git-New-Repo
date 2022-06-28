@@ -350,8 +350,8 @@ push
 
 echo Made By Osama-Yusuf
 echo My Linkedin: https://www.linkedin.com/in/osama--youssef/
-echo GitHub Repo: https://github.com/Osama-Yusuf/WIFI-Password-Cracker
+echo GitHub Repo: https://github.com/Osama-Yusuf/Git-Repo-Pusher
 
 # Made by Osama-Yusuf
-# GitHub Repo: https://github.com/Osama-Yusuf/WIFI-Password-Cracker
+# GitHub Repo: https://github.com/Osama-Yusuf/Git-Repo-Pusher
 # My Linkedin: https://www.linkedin.com/in/osama--youssef/
