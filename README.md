@@ -23,7 +23,7 @@ Download the script and give it execution permission using this command:
 curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh && chmod +x git_hub.sh
 ```
 
-## Usage for linux .  
+## Usage for linux
 
 First copy it to the binaries folder to run it as a command without the extension (.sh)
 
