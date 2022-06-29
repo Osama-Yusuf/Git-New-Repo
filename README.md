@@ -7,10 +7,11 @@ You can take a look at the [GitHub project page](https://github.com/Osama-Yusuf/
 
 ## Features
 
-* Create a local repo
-* Commit changes
-* Pull the latest updates
-* Push latest updates
+* Clone Remote Repo
+* Create a Local Repo
+* Commit Changes
+* Pull the Latest Updates
+* Push Latest Updates
 
 
 ## Getting started

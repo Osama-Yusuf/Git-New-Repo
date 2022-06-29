@@ -1,20 +1,31 @@
-if (ls /bin | grep "git" >/dev/null); then
-    # echo "Good, Git is installed lets's move on the next step"
-    echo >/dev/null
-else
-    read -p "Git is not installed, would you like to install it? [y/n] " install_git
-    if [ "$install_git" = "y" ]; then
-        sudo apt-get install git
+#!/bin/bash
+
+check_git() {
+    if (ls /bin | grep "git" >/dev/null); then
+        # echo "Good, Git is installed lets's move on the next step"
+        echo >/dev/null
     else
-        echo "Please install git and run this script again"
-        exit 1
+        read -p "Git is not installed, would you like to install it? [y/n] " install_git
+        if [ "$install_git" = "y" ]; then
+            sudo apt-get install git
+        elif [ "$install_git" = "n" ]; then
+            echo "Please install Git and try again"
+            exit 1
+        else
+            echo "Invalid input, Please enter y or n"
+            check_git
+        fi
     fi
-fi
+}
+check_git
 
 if (git config -l | grep user.name >/dev/null); then
+    clear
     echo "Good, Git is installed & configured lets's move on the next step"
     echo
+
 else
+
     read -p "Git is not configured, would you like to configure it? [y/n] " configure_git
     if [ "$configure_git" = "y" ]; then
         echo
@@ -31,10 +42,57 @@ else
     fi
 fi
 
+clone_fun() {
+
+    read -p "Enter the URL of the repository you want to clone: " repo_url
+    read -p "Enter GitHub repository name: " repo_name
+
+    echo
+    read -p "Do you want to clone $repo_name here? [y/n] " clone_here
+
+    if [ "$clone_here" = "y" ]; then
+        
+        git clone "$repo_url"
+
+        cd "$repo_name"
+        
+        clear
+        echo "$repo_name cloned successfully here: $PWD"
+        
+    elif [ "$clone_here" = "n" ]; then
+
+        read -p "Enter a directory full path that you want to clone the repository in (ex. /home/user/RepoName): " repo_dir
+        git clone $repo_url $repo_dir
+
+        cd $repo_dir
+        
+        clear
+        echo "$repo_name cloned successfully here: $PWD"
+        
+    else
+        echo "Invalid input, Please enter y or n"
+        clone_fun
+    fi
+}
+want_to_clone() {
+    read -p "Do you want to clone a remote repo? (y/n) " clone_init
+    if [ "$clone_init" = "y" ]; then
+        clear
+        clone_fun
+    elif [ "$clone_init" = "n" ]; then
+        clear
+    else
+        clear
+        echo "Invalid input, Please enter y or n"
+        want_to_clone
+    fi
+}
+want_to_clone
+
 init_fun() {
     # dicover project files in a git repository
-    # echo
     read -p "Did you execute git init command here before? (y/n) " answer_init
+    echo
     if [ "$answer_init" = "n" ]; then
         clear
         git init
@@ -43,7 +101,7 @@ init_fun() {
         clear
     else
         clear
-        echo "Please answer y or n"
+        echo "Invalid input, Please enter y or n"
         init_fun
     fi
 }
@@ -128,6 +186,11 @@ modify_branch
 modify_remote() {
 
     another_remote_fun() {
+        echo
+        git remote
+        git remote -v
+        echo
+
         read -p "DO you want to perform another remote repository modification? (y/n) " another_remote
         if [ "$another_remote" = "y" ]; then
             modify_remote
@@ -165,11 +228,11 @@ modify_remote() {
 
         elif [ "$answer_add_remove" = "r" ]; then
             echo
-            read -p "Enter remote repository name you want to remove: " remote_repository_name
+            read -p "Enter remote repository name you want to remove: " remove_remote_repository_name
             echo
-            git remote rm $remote_repository_name
+            git remote rm $remove_remote_repository_name
             clear
-            echo "$remote_repository_name removed"
+            echo "$remove_remote_repository_name removed"
             another_remote_fun
         else
             clear
@@ -351,6 +414,14 @@ push
 echo Made By Osama-Yusuf
 echo My Linkedin: https://www.linkedin.com/in/osama--youssef/
 echo GitHub Repo: https://github.com/Osama-Yusuf/Git-Repo-Pusher
+
+# check if script is source or not
+# if not reload bash to save changes like "cd dirctory"
+# must be kept at the end of the script after the last command
+if [ "$0" = "$BASH_SOURCE" ]; then
+    # if not sourced
+    $SHELL
+fi
 
 # Made by Osama-Yusuf
 # GitHub Repo: https://github.com/Osama-Yusuf/Git-Repo-Pusher
