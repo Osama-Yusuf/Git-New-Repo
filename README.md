@@ -34,7 +34,7 @@ or download the script manually and give it execution permission using this comm
 curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh && chmod +x git_hub.sh
 ```
 
-## Usage
+## Usage execute these commands in linux termain, for windwos open git bash termainl, inside ther terminal copy & paste these commands in orde 
 
 Just execute the script:
 
