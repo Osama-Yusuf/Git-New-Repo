@@ -78,7 +78,7 @@ If you have successfully tested this script on others systems or platforms pleas
 ---
 
 * `By Osama-Yusuf`
-* `Tranks for reading`
+* `Thanks for reading`
 
 -------
 ##### Report bugs for "Git-Repo-Pusher"
