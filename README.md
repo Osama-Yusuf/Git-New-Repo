@@ -23,12 +23,21 @@ Download the script and give it execution permission using this command:
 curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh && chmod +x git_hub.sh
 ```
 
-## Usage for linux
+## Usage for linux & windows
+### but for windows Git must be pre-installed, Or this script won't work. Open git bash termainl as adminstrator then
 
 First copy it to the binaries folder to run it as a command without the extension (.sh)
 
+### For linux use sudo:
+
 ```
-su cp git_hub.sh /usr/bin/git-pusher
+sudo cp git_hub.sh /usr/bin/git-pusher
+```
+
+### For windows open git bash as admin and remove sudo:
+
+```
+ cp git_hub.sh /usr/bin/git-pusher
 ``` 
 
 You can delete the script now if you want.
@@ -41,19 +50,6 @@ Then execute the script and let it do all the work:
 
 ```
 git-pusher
-```
-or
-```
-source git_hub.sh
-```
-
-## Usage for windwos 
-### Git must be pre-installed, Or this script won't work. Open git bash termainl then
-
-Execute the script and let it do all the work:
-
-```
-bash git_hub.sh
 ```
 or
 ```
