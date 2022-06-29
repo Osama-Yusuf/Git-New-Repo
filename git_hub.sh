@@ -2,7 +2,7 @@
 
 check_git() {
     if (ls /bin | grep "git" >/dev/null); then
-        # echo "Good, Git is installed lets's move on the next step"
+        # echo "Good, Git is installed lets's move on to the next step"
         echo >/dev/null
     else
         read -p "Git is not installed, would you like to install it? [y/n] " install_git
@@ -21,7 +21,7 @@ check_git
 
 if (git config -l | grep user.name >/dev/null); then
     clear
-    echo "Good, Git is installed & configured lets's move on the next step"
+    echo "Good, Git is installed & configured lets's move on to the next step"
     echo
 
 else
@@ -34,7 +34,7 @@ else
         git config --global user.name "$UserName"
         git config --global user.email "$Email"
         echo
-        echo "Good, Git is installed & configured lets's move on the next step"
+        echo "Good, Git is installed & configured lets's move on to the next step"
         echo
     else
         echo "Please configure git and run this script again"
@@ -91,18 +91,27 @@ want_to_clone
 
 init_fun() {
     # dicover project files in a git repository
-    read -p "Did you execute git init command here before? (y/n) " answer_init
-    echo
-    if [ "$answer_init" = "n" ]; then
+    # read -p "Did you execute git init command here before? (y/n) " answer_init
+    if (ls -a | grep ".git" >/dev/null); then
         clear
-        git init
+        echo "Good, this dirctory $PWD is initialized lets's move on to the next step"
         echo
-    elif [ "$answer_init" = "y" ]; then
-        clear
     else
-        clear
-        echo "Invalid input, Please enter y or n"
-        init_fun
+        read -p "This directory $PWD is not initialized do you want to execute 'git init' (h)ere or check (e)lsewhere? [h/e] " check_init
+        if [ "$check_init" = "h" ]; then
+            clear
+            git init -q
+            echo "Directory is initialized"
+            echo
+        elif [ "$check_init" = "e" ]; then
+            read -p "Please enter full path of the directory you want to perform git operations in it: " init_path
+            echo
+            cd $init_path
+            init_fun
+        else
+            echo "Invalid input, Please enter h or y"
+            init_fun
+        fi
     fi
 }
 init_fun
