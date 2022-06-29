@@ -39,9 +39,11 @@ curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub
 Just execute the script:
 
 ```
-./git_hub.sh
-or
 bash git_hub.sh
+```
+or
+```
+source git_hub.sh
 ```
 ## Tested Environments
 
