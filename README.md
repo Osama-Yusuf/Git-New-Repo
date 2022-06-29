@@ -1,3 +1,4 @@
+
 # Git Repo Pusher
 
 **Git Repo Pusher** is a **BASH** script that can be used to pull or push the latest updates to or from GitHub repo
@@ -16,19 +17,7 @@ You can take a look at the [GitHub project page](https://github.com/Osama-Yusuf/
 
 ## Getting started
 
-First, clone the repository using git (recommended):
-
-```bash
-git clone https://github.com/Osama-Yusuf/Git-Repo-Pusher.git
-```
-
-Then enter repo folder and give the execution permission to the script:
-
- ```bash
-cd Git-Repo-Pusher && chmod +x git_hub.sh
-``` 
-
-or download the script manually and give it execution permission using this command:
+Download the script and give it execution permission using this command:
 
 ```bash
 curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh && chmod +x git_hub.sh
@@ -36,10 +25,22 @@ curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub
 
 ## Usage for linux .  
 
-Execute the script and let it do all the work:
+First copy it to the binaries folder to run it as a command without the extension (.sh)
 
 ```
-bash git_hub.sh
+su cp git_hub.sh /usr/bin/git-pusher
+``` 
+
+You can delete the script now if you want.
+
+```
+rm -f git_hub.sh
+```
+
+Then execute the script and let it do all the work:
+
+```
+git-pusher
 ```
 or
 ```
