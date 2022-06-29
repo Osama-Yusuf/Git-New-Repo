@@ -63,6 +63,7 @@ source git_hub.sh
 
 * Ubuntu Os.
 * Kali-Linux Os.
+* Windwos 11.
 
 If you have successfully tested this script on others systems or platforms please let me know!
 
