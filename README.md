@@ -23,7 +23,7 @@ Download the script and give it execution permission using this command:
 curl "https://raw.githubusercontent.com/Osama-Yusuf/Git-Repo-Pusher/main/git_hub.sh" -o git_hub.sh && chmod +x git_hub.sh
 ```
 
-## Usage for linux & windows
+## Usage for Linux & Windows
 ### but for windows Git must be pre-installed, Or this script won't work. Open git bash termainl as adminstrator then
 
 First copy it to the binaries folder to run it as a command without the extension (.sh)
@@ -69,7 +69,7 @@ If you have successfully tested this script on others systems or platforms pleas
  If you want to support this project, please consider donating:
  * PayPal: https://paypal.me/OsamaYusuf
  * Buy me a coffee: https://www.buymeacoffee.com/OsamaYusuf
- * ETH: 0x507bF8931b534a81Ced18FDf8fc5BE4Daf08332B(https://stackedit.io/).
+ * ETH: 0x507bF8931b534a81Ced18FDf8fc5BE4Daf08332B
 
 ---
 
