@@ -397,6 +397,7 @@ if [ "$(git status --porcelain)" != "" ]; then
     commit
 else
     echo "No changes/files to add, remove or commit"
+    echo
 fi
 
 undo_commit_fun() {
