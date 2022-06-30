@@ -371,7 +371,6 @@ add_remove_files() {
         add_remove_files
     fi
 }
-add_remove_files
 
 commit() {
     # commit the changes
@@ -393,9 +392,10 @@ commit() {
 
 # check if there's changes to commit
 if [ "$(git status --porcelain)" != "" ]; then
+    add_remove_files
     commit
 else
-    echo "No changes to commit"
+    echo "No changes/files to add, remove or commit"
 fi
 
 undo_commit_fun() {
