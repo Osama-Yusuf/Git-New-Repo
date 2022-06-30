@@ -278,14 +278,14 @@ else
 fi
 
 # check for unmodified files & uncommited changes
-files_add() {
+add_remove_files() {
     git status
     echo
 
     missed_add_fun() {
-        read -p "Missed to add files or did you make you a typo? (y/n) " missed_add
+        read -p "Missed files or made a typo? (y/n) " missed_add
         if [ "$missed_add" = "y" ]; then
-            files_add
+            add_remove_files
         elif [ "$missed_add" = "n" ]; then
             clear
         else
@@ -295,34 +295,83 @@ files_add() {
             missed_add_fun
         fi
     }
-    # add all files or add specific files or do nothing
-    read -p "Do you want to add (a)ll files or add (s)pecific files or do (n)othing? (a/s/n) " answer_add
-    if [ "$answer_add" = "a" ]; then
-        git add .
+
+    add_files() {
+        # add all files or add specific files or do nothing
+        read -p "Do you want to add (a)ll files or add (s)pecific files or do (n)othing? (a/s/n) " answer_add
+        if [ "$answer_add" = "a" ]; then
+            git add .
+            clear
+            echo "All files added"
+            echo
+        elif [ "$answer_add" = "s" ]; then
+            clear
+            read -p "Enter the file name you want to add: " file_name
+            git add $file_name
+            echo
+            echo "$file_name added successfully"
+            echo
+            missed_add_fun
+            clear
+            echo "$file_name added successfully"
+            echo
+        elif [ "$answer_add" = "n" ]; then
+            clear
+            echo "No files added"
+        else
+            clear
+            echo "Invalid input, Please enter a or s or n"
+            add_files
+        fi
+    }
+
+    remove_files() {
+        # remove all files or remove specific files or do nothing
+        read -p "Do you want to remove (a)ll files or remove (s)pecific files or do (n)othing? (a/s/n) " answer_remove
+        if [ "$answer_remove" = "a" ]; then
+            git rm --cached -r .
+            clear
+            echo "All files removed"
+            echo
+        elif [ "$answer_remove" = "s" ]; then
+            clear
+            read -p "Enter the file name you want to remove: " file_name
+            git rm --cached $file_name
+            echo
+            echo "$file_name removed successfully"
+            echo
+            missed_add_fun
+            clear
+            echo "$file_name removed successfully"
+            echo
+        elif [ "$answer_remove" = "n" ]; then
+            clear
+            echo "No files removed"
+        else
+            clear
+            echo "Invalid input, Please enter a or s or n"
+            remove_files
+        fi
+    }
+
+    # do you want to add or files
+    read -p "Do you want to (a)dd or (r)emove deleted files or (s)kip this step? (a/r/s) " answer_add_remove
+
+    if [ "$answer_add_remove" = "a" ]; then
+        add_files
+    elif [ "$answer_add_remove" = "r" ]; then
+        remove_files
+    elif [ "$answer_add_remove" = "s" ]; then
         clear
-        echo "All files added"
+        echo "No files were added or removed"
         echo
-    elif [ "$answer_add" = "s" ]; then
-        clear
-        read -p "Enter the file name you want to add: " file_name
-        git add $file_name
-        echo
-        echo "$file_name added successfully"
-        echo
-        missed_add_fun
-        clear
-        echo "$file_name added successfully"
-        echo
-    elif [ "$answer_add" = "n" ]; then
-        clear
-        echo "No files added"
     else
         clear
-        echo "Invalid input, Please enter a or s or n"
-        files_add
+        echo "Invalid input, Please enter a or r or s"
+        add_remove_files
     fi
 }
-files_add
+add_remove_files
 
 commit() {
     # commit the changes
@@ -341,7 +390,13 @@ commit() {
         commit
     fi
 }
-commit
+# commit
+# if file_name is not empty, commit the changes
+if [ -z "$file_name" ]; then
+    echo "No changes to commit"
+else
+    commit
+fi
 
 echo
 git status
