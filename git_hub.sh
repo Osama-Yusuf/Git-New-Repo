@@ -355,7 +355,7 @@ add_remove_files() {
     }
 
     # do you want to add or files
-    read -p "Do you want to (a)dd or (r)emove deleted files or (s)kip this step? (a/r/s) " answer_add_remove
+    read -p "Do you want to (a)dd or (r)emove files to/from git repo or (s)kip this step? (a/r/s) " answer_add_remove
 
     if [ "$answer_add_remove" = "a" ]; then
         add_files
