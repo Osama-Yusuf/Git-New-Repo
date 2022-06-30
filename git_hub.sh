@@ -390,13 +390,31 @@ commit() {
         commit
     fi
 }
-# commit
-# if file_name is not empty, commit the changes
-if [ -z "$file_name" ]; then
-    echo "No changes to commit"
-else
+
+# check if there's changes to commit
+if [ "$(git status --porcelain)" != "" ]; then
     commit
+else
+    echo "No changes to commit"
 fi
+
+undo_commit_fun() {
+    read -p "Do you want to undo the last commit? (y/n) " undo_commit
+
+    if [ "$undo_commit" = "y" ]; then
+        git reset --soft HEAD~1
+        clear
+        echo "Last commit undone"
+    elif [ "$undo_commit" = "n" ]; then
+        clear
+        echo "Last commit remains"
+    else
+        clear
+        echo "Invalid input, Please enter y or n"
+        undo_commit_fun
+    fi
+}
+undo_commit_fun
 
 echo
 git status
