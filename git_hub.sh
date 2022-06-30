@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git config credential.helper store
+
 check_git() {
     if (ls /bin | grep "git" >/dev/null); then
         # echo "Good, Git is installed lets's move on to the next step"
@@ -367,7 +369,7 @@ pull() {
     read -p "Do you want to pull the changes from remote repository? (y/n) " answer_pull
     if [ "$answer_pull" = "y" ]; then
         remote_branch_vars
-        git pull -u $remote_repository_name $branch_name
+        git pull $remote_repository_name $branch_name
         clear
         echo "Pulled successfully"
     elif [ "$answer_pull" = "n" ]; then
