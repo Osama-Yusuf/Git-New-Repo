@@ -380,6 +380,7 @@ commit() {
         git commit -m "$commit_message"
         clear
         echo "Commited successfully: $commit_message"
+        echo
     elif [ "$answer_commit" = "n" ]; then
         clear
         echo "No changes committed"
