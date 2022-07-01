@@ -356,7 +356,7 @@ add_remove_files() {
     }
 
     restore_files() {
-        # restore all files or restore specific files or do nothing
+        # restore all files or restore specific files or do nothing (restore deleted files or discrad changes to files)
         read -p "Do you want to restore (a)ll files or restore (s)pecific files or do (n)othing? (a/s/n) " answer_restore
         if [ "$answer_restore" = "a" ]; then
             git restore --all
@@ -448,6 +448,8 @@ commit() {
 # check if there's changes to commit
 if [ "$(git status --porcelain)" != "" ]; then
     add_remove_files
+    if [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
+    
     commit
 else
     echo "No changes/files to add, remove or commit"
