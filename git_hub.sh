@@ -141,7 +141,7 @@ check_gitignore() {
             echo .gitignore >> .gitignore
             echo git_hub.sh >> .gitignore
         fi
-        
+
     else
         echo "this script is running from bin" >/dev/null
     fi
