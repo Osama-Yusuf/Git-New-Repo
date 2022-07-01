@@ -306,13 +306,10 @@ add_remove_files() {
             clear
             read -p "Enter the file name you want to add: " file_name
             git add $file_name
-            echo
-            echo "$file_name added successfully"
-            echo
-            missed_add_fun
             clear
             echo "$file_name added successfully"
             echo
+            missed_add_fun
         elif [ "$answer_add" = "n" ]; then
             clear
             echo "No files added"
@@ -337,13 +334,10 @@ add_remove_files() {
             clear
             read -p "Enter the file name you want to remove: " file_name
             git rm --cached $file_name
-            echo
-            echo "$file_name removed successfully"
-            echo
-            missed_add_fun
             clear
             echo "$file_name removed successfully"
             echo
+            missed_add_fun
         elif [ "$answer_remove" = "n" ]; then
             clear
             echo "No files removed"
@@ -359,7 +353,7 @@ add_remove_files() {
         # restore all files or restore specific files or do nothing (restore deleted files or discrad changes to files)
         read -p "Do you want to restore (a)ll files or restore (s)pecific files or do (n)othing? (a/s/n) " answer_restore
         if [ "$answer_restore" = "a" ]; then
-            git restore --all
+            git restore --staged .
             clear
             echo "All files restored"
             echo
@@ -367,13 +361,10 @@ add_remove_files() {
             clear
             read -p "Enter the file name you want to restore: " file_name
             git restore $file_name
-            echo
-            echo "$file_name restored successfully"
-            echo
-            missed_add_fun
             clear
             echo "$file_name restored successfully"
             echo
+            missed_add_fun
         elif [ "$answer_restore" = "n" ]; then
             clear
             echo "No files restored"
@@ -410,19 +401,17 @@ add_remove_files() {
         remove_files
     fi
 
-    if [ "$(git status | grep "git restore" | wc -l)" -gt 0 ]; then
-        git status
-	    echo
-        restore_files
-    fi
-
     if [ "$(git status | grep "git add" | wc -l)" -gt 0 ]; then
         git status
 	    echo
         add_files
     fi
 
-    missed_add_fun
+    if [ "$(git status | grep "git restore" | wc -l)" -gt 0 ]; then
+        git status
+	    echo
+        restore_files
+    fi
 }
 
 commit() {
@@ -448,9 +437,9 @@ commit() {
 # check if there's changes to commit
 if [ "$(git status --porcelain)" != "" ]; then
     add_remove_files
-    if [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
-    
-    commit
+    if [ "$(git status | grep "Changes to be committed" | wc -l)" -gt 0 ]; then
+        commit
+    fi
 else
     echo "No changes/files to add, remove or commit"
     echo
