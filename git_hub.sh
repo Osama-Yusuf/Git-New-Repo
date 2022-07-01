@@ -279,8 +279,6 @@ fi
 
 # check for unmodified files & uncommited changes
 add_remove_files() {
-    git status
-    echo
 
     missed_add_fun() {
         read -p "Missed files or made a typo? (y/n) " missed_add
@@ -318,10 +316,12 @@ add_remove_files() {
         elif [ "$answer_add" = "n" ]; then
             clear
             echo "No files added"
+	    echo
         else
             clear
             echo "Invalid input, Please enter a or s or n"
-            add_files
+            echo
+	    add_files
         fi
     }
 
@@ -347,6 +347,7 @@ add_remove_files() {
         elif [ "$answer_remove" = "n" ]; then
             clear
             echo "No files removed"
+	    echo
         else
             clear
             echo "Invalid input, Please enter a or s or n"
@@ -375,11 +376,14 @@ add_remove_files() {
 
         # check if there's deleted or modified files
     if [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
+	git status
+	echo
         remove_files
     fi
 
     if [ "$(git status | grep "git add" | wc -l)" -gt 0 ]; then
         git status
+	echo
         add_files
     fi
 
@@ -398,6 +402,7 @@ commit() {
     elif [ "$answer_commit" = "n" ]; then
         clear
         echo "No changes committed"
+	echo
     else
         clear
         echo "Invalid input, Please enter y or n"
@@ -502,7 +507,9 @@ push() {
         error_pushing
         echo
     elif [ "$answer_push" = "n" ]; then
+	clear
         echo "No changes pushed"
+	echo
     else
         clear
         echo "Invalid input, Please enter y or n"
