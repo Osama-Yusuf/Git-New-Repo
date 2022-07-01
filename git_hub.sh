@@ -94,7 +94,8 @@ want_to_clone
 init_fun() {
     # dicover project files in a git repository
     # read -p "Did you execute git init command here before? (y/n) " answer_init
-    if (ls -a | grep ".git" >/dev/null); then
+    # if (ls -a | grep ".git" >/dev/null); then
+    if [ -d .git ]; then
         clear
         echo "Good, this dirctory $PWD is initialized lets's move on to the next step"
         echo
