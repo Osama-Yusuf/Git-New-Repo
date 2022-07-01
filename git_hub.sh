@@ -316,12 +316,12 @@ add_remove_files() {
         elif [ "$answer_add" = "n" ]; then
             clear
             echo "No files added"
-	    echo
+	        echo
         else
             clear
             echo "Invalid input, Please enter a or s or n"
             echo
-	    add_files
+	        add_files
         fi
     }
 
@@ -347,7 +347,7 @@ add_remove_files() {
         elif [ "$answer_remove" = "n" ]; then
             clear
             echo "No files removed"
-	    echo
+	        echo
         else
             clear
             echo "Invalid input, Please enter a or s or n"
@@ -355,10 +355,39 @@ add_remove_files() {
         fi
     }
 
+    restore_files() {
+        # restore all files or restore specific files or do nothing
+        read -p "Do you want to restore (a)ll files or restore (s)pecific files or do (n)othing? (a/s/n) " answer_restore
+        if [ "$answer_restore" = "a" ]; then
+            git restore --all
+            clear
+            echo "All files restored"
+            echo
+        elif [ "$answer_restore" = "s" ]; then
+            clear
+            read -p "Enter the file name you want to restore: " file_name
+            git restore $file_name
+            echo
+            echo "$file_name restored successfully"
+            echo
+            missed_add_fun
+            clear
+            echo "$file_name restored successfully"
+            echo
+        elif [ "$answer_restore" = "n" ]; then
+            clear
+            echo "No files restored"
+            echo
+        else
+            clear
+            echo "Invalid input, Please enter a or s or n"
+            restore_files
+        fi
+    }
+
     # add_remove_skip() {
     #     # do you want to add or files
     #     read -p "Do you want to (a)dd or (r)emove files to/from git repo or (s)kip this step? (a/r/s) " answer_add_remove
-
     #     if [ "$answer_add_remove" = "a" ]; then
     #         add_files
     #     elif [ "$answer_add_remove" = "r" ]; then
@@ -376,14 +405,20 @@ add_remove_files() {
 
         # check if there's deleted or modified files
     if [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
-	git status
-	echo
+        git status
+        echo
         remove_files
+    fi
+
+    if [ "$(git status | grep "git restore" | wc -l)" -gt 0 ]; then
+        git status
+	    echo
+        restore_files
     fi
 
     if [ "$(git status | grep "git add" | wc -l)" -gt 0 ]; then
         git status
-	echo
+	    echo
         add_files
     fi
 
@@ -402,7 +437,7 @@ commit() {
     elif [ "$answer_commit" = "n" ]; then
         clear
         echo "No changes committed"
-	echo
+	    echo
     else
         clear
         echo "Invalid input, Please enter y or n"
@@ -507,9 +542,9 @@ push() {
         error_pushing
         echo
     elif [ "$answer_push" = "n" ]; then
-	clear
+	    clear
         echo "No changes pushed"
-	echo
+	    echo
     else
         clear
         echo "Invalid input, Please enter y or n"
