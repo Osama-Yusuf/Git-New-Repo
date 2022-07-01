@@ -354,21 +354,37 @@ add_remove_files() {
         fi
     }
 
-    # do you want to add or files
-    read -p "Do you want to (a)dd or (r)emove files to/from git repo or (s)kip this step? (a/r/s) " answer_add_remove
+    add_remove_skip() {
+        # do you want to add or files
+        read -p "Do you want to (a)dd or (r)emove files to/from git repo or (s)kip this step? (a/r/s) " answer_add_remove
 
-    if [ "$answer_add_remove" = "a" ]; then
+        if [ "$answer_add_remove" = "a" ]; then
+            add_files
+        elif [ "$answer_add_remove" = "r" ]; then
+            remove_files
+        elif [ "$answer_add_remove" = "s" ]; then
+            clear
+            echo "No files were added or removed"
+            echo
+        else
+            clear
+            echo "Invalid input, Please enter a or r or s"
+            add_remove_files
+        fi
+    }
+
+        # check if there's deleted or modified files
+    if [ "$(git status | grep "modified" | wc -l)" -gt 0 ]; then
+        add_remove_skip
+    elif [ "$(git status | grep "Untracked files" | wc -l)" -gt 0 ]; then
         add_files
-    elif [ "$answer_add_remove" = "r" ]; then
-        remove_files
-    elif [ "$answer_add_remove" = "s" ]; then
-        clear
-        echo "No files were added or removed"
-        echo
-    else
-        clear
-        echo "Invalid input, Please enter a or r or s"
         add_remove_files
+    elif [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
+        remove_files
+        add_remove_files
+    else
+        echo "No files added or removed"
+        echo
     fi
 }
 
