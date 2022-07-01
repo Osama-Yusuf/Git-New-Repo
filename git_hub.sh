@@ -398,7 +398,7 @@ add_remove_restore_files() {
             missed_add_fun
         elif [ "$answer_restore" = "n" ]; then
             clear
-            echo "No files restored"
+            echo "No files restored">/dev/null
             echo
         else
             clear
@@ -421,22 +421,22 @@ add_remove_restore_files() {
     #     else
     #         clear
     #         echo "Invalid input, Please enter a or r or s"
-    #         add_remove_restore_files
+    #         add_remove_files
     #     fi
     # }
-
-        # check if there's deleted or modified files
-    if [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
-        git status
-        echo
-        remove_files
-    fi
 
     if [ "$(git status | grep "git add" | wc -l)" -gt 0 ]; then
         git status
 	    echo
         add_files
     fi
+
+    # check if there's deleted or modified files
+    # if [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
+    git status
+    echo
+    remove_files
+    # fi
 
     if [ "$(git status | grep "git restore" | wc -l)" -gt 0 ]; then
         git status
