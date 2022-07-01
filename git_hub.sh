@@ -120,24 +120,30 @@ init_fun
 
 # checking if there's a .gitignore file in the directory and if not, create one
 check_gitignore() {
-    if (ls -a | grep ".gitignore" >/dev/null); then
+    # check if user is running the script in the project or from bin
+    if (ls -a | grep "git_hub.sh" >/dev/null); then
 
-        if (cat .gitignore | grep git_hub.sh >/dev/null); then
-            echo > /dev/null
+        if (ls -a | grep ".gitignore" >/dev/null); then
+
+            if (cat .gitignore | grep git_hub.sh >/dev/null); then
+                echo > /dev/null
+            else
+                echo git_hub.sh >> .gitignore
+            fi
+
+            if (cat .gitignore | grep ".gitignore" >/dev/null); then
+                echo > /dev/null
+            else
+                echo ".gitignore" >> .gitignore
+            fi
         else
+            touch .gitignore
+            echo .gitignore >> .gitignore
             echo git_hub.sh >> .gitignore
-        fi
-
-        if (cat .gitignore | grep ".gitignore" >/dev/null); then
-            echo > /dev/null
-        else
-            echo ".gitignore" >> .gitignore
         fi
         
     else
-        touch .gitignore
-        echo .gitignore >> .gitignore
-        echo git_hub.sh >> .gitignore
+        echo "this script is running from bin" >/dev/null
     fi
 }
 check_gitignore
