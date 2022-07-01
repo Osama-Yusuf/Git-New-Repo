@@ -329,7 +329,7 @@ add_remove_files() {
         # remove all files or remove specific files or do nothing
         read -p "Do you want to remove (a)ll files or remove (s)pecific files or do (n)othing? (a/s/n) " answer_remove
         if [ "$answer_remove" = "a" ]; then
-            git rm --cached -r .
+            git rm --cached -r --dry-run .
             clear
             echo "All files removed"
             echo
@@ -354,38 +354,36 @@ add_remove_files() {
         fi
     }
 
-    add_remove_skip() {
-        # do you want to add or files
-        read -p "Do you want to (a)dd or (r)emove files to/from git repo or (s)kip this step? (a/r/s) " answer_add_remove
+    # add_remove_skip() {
+    #     # do you want to add or files
+    #     read -p "Do you want to (a)dd or (r)emove files to/from git repo or (s)kip this step? (a/r/s) " answer_add_remove
 
-        if [ "$answer_add_remove" = "a" ]; then
-            add_files
-        elif [ "$answer_add_remove" = "r" ]; then
-            remove_files
-        elif [ "$answer_add_remove" = "s" ]; then
-            clear
-            echo "No files were added or removed"
-            echo
-        else
-            clear
-            echo "Invalid input, Please enter a or r or s"
-            add_remove_files
-        fi
-    }
+    #     if [ "$answer_add_remove" = "a" ]; then
+    #         add_files
+    #     elif [ "$answer_add_remove" = "r" ]; then
+    #         remove_files
+    #     elif [ "$answer_add_remove" = "s" ]; then
+    #         clear
+    #         echo "No files were added or removed"
+    #         echo
+    #     else
+    #         clear
+    #         echo "Invalid input, Please enter a or r or s"
+    #         add_remove_files
+    #     fi
+    # }
 
         # check if there's deleted or modified files
-    if [ "$(git status | grep "modified" | wc -l)" -gt 0 ]; then
-        add_remove_skip
-    elif [ "$(git status | grep "Untracked files" | wc -l)" -gt 0 ]; then
-        add_files
-        add_remove_files
-    elif [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
+    if [ "$(git status | grep "deleted" | wc -l)" -gt 0 ]; then
         remove_files
-        add_remove_files
-    else
-        echo "No files added or removed"
-        echo
     fi
+
+    if [ "$(git status | grep "git add" | wc -l)" -gt 0 ]; then
+        git status
+        add_files
+    fi
+
+    missed_add_fun
 }
 
 commit() {
