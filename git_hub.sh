@@ -308,12 +308,12 @@ else
 fi
 
 # check for unmodified files & uncommited changes
-add_remove_files() {
+add_remove_restore_files() {
 
     missed_add_fun() {
         read -p "Missed files or made a typo? (y/n) " missed_add
         if [ "$missed_add" = "y" ]; then
-            add_remove_files
+            add_remove_restore_files
         elif [ "$missed_add" = "n" ]; then
             clear
         else
@@ -420,7 +420,7 @@ add_remove_files() {
     #     else
     #         clear
     #         echo "Invalid input, Please enter a or r or s"
-    #         add_remove_files
+    #         add_remove_restore_files
     #     fi
     # }
 
@@ -466,7 +466,7 @@ commit() {
 
 # check if there's changes to commit
 if [ "$(git status --porcelain)" != "" ]; then
-    add_remove_files
+    add_remove_restore_files
     if [ "$(git status | grep "Changes to be committed" | wc -l)" -gt 0 ]; then
         commit
     fi

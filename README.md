@@ -10,9 +10,11 @@ You can take a look at the [GitHub project page](https://github.com/Osama-Yusuf/
 
 * Clone Remote Repo
 * Create a Local Repo
-* Commit Changes
-* Pull the Latest Updates
-* Push Latest Updates
+* Create, Remove, & Set Default Branach
+* Create & Remove Remote Repositories
+* Add, Remove & Restore Changes
+* Commit & Revert Committed Changes
+* Pull & Push Changes
 
 
 ## Getting started
@@ -31,13 +33,13 @@ First copy it to the binaries folder to run it as a command without the extensio
 ### For linux use sudo:
 
 ```
-sudo cp git_hub.sh /usr/bin/git-pusher
+sudo cp git_hub.sh /usr/bin/pusher
 ```
 
 ### For windows open git bash as admin and remove sudo:
 
 ```
- cp git_hub.sh /usr/bin/git-pusher
+ cp git_hub.sh /usr/bin/pusher
 ``` 
 
 You can delete the script now if you want.
@@ -46,10 +48,10 @@ You can delete the script now if you want.
 rm -f git_hub.sh
 ```
 
-Then execute the script and let it do all the work:
+Then execute the script inside desired directory and let it do all the work:
 
 ```
-git-pusher
+pusher
 ```
 or
 ```
