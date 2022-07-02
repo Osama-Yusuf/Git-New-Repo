@@ -313,9 +313,7 @@ check_readme() {
     if (ls -a | grep "README.md" >/dev/null); then
         echo >/dev/null
     else
-        echo "There is no README.md file here"
-        # echo
-        read -p "Do you want to create one? (y/n) " answer_readme
+        read -p "There is no README.md file here, Do you want to create one? (y/n) " answer_readme
         if [ "$answer_readme" = "y" ]; then
             echo
             read -p "Enter the title of the project: " project_title
