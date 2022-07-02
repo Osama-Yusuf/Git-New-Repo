@@ -318,8 +318,10 @@ check_readme() {
             echo
             read -p "Enter the title of the project: " project_title
             echo
-            echo "# $project_title" README.md
+            echo "# $project_title" > README.md
+            clear
             echo "README.md created"
+            echo
         elif [ "$answer_readme" = "n" ]; then
             echo >/dev/null
         else
