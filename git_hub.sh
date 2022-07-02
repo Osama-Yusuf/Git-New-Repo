@@ -19,7 +19,7 @@ check_git() {
         fi
     fi
 }
-check_git
+check_git 
 
 if (git config -l | grep user.name >/dev/null); then
     clear
