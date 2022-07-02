@@ -308,6 +308,30 @@ else
     modify_remote
 fi
 
+# check if there's a README.md file in the directory and if not ask if the user wants to create one
+check_readme() {
+    if (ls -a | grep "README.md" >/dev/null); then
+        echo >/dev/null
+    else
+        echo "There is no README.md file here"
+        # echo
+        read -p "Do you want to create one? (y/n) " answer_readme
+        if [ "$answer_readme" = "y" ]; then
+            echo
+            read -p "Enter the title of the project: " project_title
+            echo
+            echo "# $project_title" README.md
+            echo "README.md created"
+        elif [ "$answer_readme" = "n" ]; then
+            echo >/dev/null
+        else
+            echo "Invalid input, Please enter y or n"
+            check_readme
+        fi
+    fi
+}
+check_readme
+
 # check for unmodified files & uncommited changes
 add_remove_restore_files() {
 
