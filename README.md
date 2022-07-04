@@ -14,6 +14,7 @@ You can take a look at the [GitHub project page](https://github.com/Osama-Yusuf/
 * Create & Remove Remote Repositories
 * Add, Remove & Restore Changes
 * Commit & Revert Committed Changes
+* Add a README.md file if not existed
 * Pull & Push Changes
 
 
