@@ -1,6 +1,9 @@
 #!/bin/bash
 
+# to skip the login with username & password and you won't be asked for them 
 git config credential.helper store
+# git config --global credential.helper store
+# git config --global credential.helper 'store --file ~/.my-credentials'
 
 check_git() {
     if (ls /bin | grep "git" >/dev/null); then
@@ -53,8 +56,9 @@ clone_fun() {
     read -p "Do you want to clone $repo_name here? [y/n] " clone_here
 
     if [ "$clone_here" = "y" ]; then
-        
-        git clone "$repo_url"
+
+        # git clone https://github.com/Osama-Yusuf/Git-Repo-Pusher ~/repos/github/
+        git clone $repo_url $repo_name
 
         cd "$repo_name"
         
