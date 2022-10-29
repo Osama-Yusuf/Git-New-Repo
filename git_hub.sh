@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# to skip the login with username & password and you won't be asked for them 
-git config credential.helper store
-# git config --global credential.helper store
-# git config --global credential.helper 'store --file ~/.my-credentials'
+if [ -d .git ]; then
+    # echo "Good, this dirctory $PWD is initialized lets's move on to the next step"
+    # to skip the login with username & password and you won't be asked for them 
+    git config credential.helper store
+    # git config --global credential.helper store
+    # git config --global credential.helper 'store --file ~/.my-credentials'
+fi
 
 check_git() {
     if (ls /bin | grep "git" >/dev/null); then
@@ -102,6 +105,7 @@ init_fun() {
     if [ -d .git ]; then
         clear
         echo "Good, this dirctory $PWD is initialized lets's move on to the next step"
+        git config credential.helper store
         echo
     else
         read -p "This directory $PWD is not initialized do you want to execute 'git init' (h)ere or check (e)lsewhere? [h/e] " check_init
@@ -109,6 +113,7 @@ init_fun() {
             clear
             git init -q
             echo "Directory is initialized"
+            git config credential.helper store
             echo
         elif [ "$check_init" = "e" ]; then
             read -p "Please enter full path of the directory you want to perform git operations in it: " init_path
@@ -532,8 +537,8 @@ remote_branch_vars() {
         if [ -z "$branch_name" ]; then
             # echo "vars are empty"
             echo
-            read -p "Enter the remote repository name you want to push to (ex. origin): " remote_repository_name
-            read -p "Enter the branch name you want to push to (ex. main): " branch_name
+            read -p "Enter the remote repository name you want to push/pull to (ex. origin): " remote_repository_name
+            read -p "Enter the branch name you want to push/pull to (ex. main): " branch_name
         else
             # echo "vars are NOT empty and has: $remote_repository_name $branch_name"
             echo
